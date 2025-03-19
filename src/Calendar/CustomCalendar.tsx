@@ -1,15 +1,15 @@
-import React, {useRef, useState} from "react";
-import {format, startOfMonth, getDaysInMonth, addMonths, subMonths} from "date-fns";
-import {ChevronLeftIcon, ChevronRightIcon} from "@heroicons/react/24/outline";
-import {ru} from "date-fns/locale";
-import {useOnClickOutside} from "./useOnClickOutside.ts";
+import React, { useRef, useState } from 'react';
+import { format, startOfMonth, getDaysInMonth, addMonths, subMonths } from 'date-fns';
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
+import { ru } from 'date-fns/locale';
+import { useOnClickOutside } from './useOnClickOutside.ts';
 
 interface Props {
-    date: Date | null
+    date: Date | null;
     selectDate: (date: Date) => void;
 }
 
-const Calendar: React.FC<Props> = ({date,selectDate}) => {
+const Calendar: React.FC<Props> = ({ date, selectDate }) => {
     const [selectedDate, setSelectedDate] = useState<Date>(new Date());
     const [mode, setMode] = useState<'days' | 'months' | 'years'>('days');
     const [isOpen, setIsOpen] = useState(false);
@@ -50,8 +50,8 @@ const Calendar: React.FC<Props> = ({date,selectDate}) => {
     };
 
     // Функция для смены месяца
-    const handleMonthChange = (direction: "next" | "prev") => {
-        const newDate = direction === "next" ? addMonths(selectedDate, 1) : subMonths(selectedDate, 1);
+    const handleMonthChange = (direction: 'next' | 'prev') => {
+        const newDate = direction === 'next' ? addMonths(selectedDate, 1) : subMonths(selectedDate, 1);
         setSelectedDate(newDate);
     };
 
@@ -62,36 +62,50 @@ const Calendar: React.FC<Props> = ({date,selectDate}) => {
     const renderDays = () => {
         return (
             <div>
-                <div className="flex justify-between items-center">
-                    <div className='capitalize'
-                         onClick={switchToYearsMode}>{format(selectedDate, "MMMM yyyy", {locale: ru})}г.
+                <div className='flex items-center justify-between'>
+                    <div
+                        className='capitalize'
+                        onClick={switchToYearsMode}
+                    >
+                        {format(selectedDate, 'MMMM yyyy', { locale: ru })}г.
                     </div>
                     <div className='flex items-center'>
-                        <ChevronLeftIcon onClick={() => handleMonthChange("prev")} className="w-3 h-"/>
-                        <ChevronRightIcon onClick={() => handleMonthChange("next")} className="w-3 h-3"/>
+                        <ChevronLeftIcon
+                            onClick={() => handleMonthChange('prev')}
+                            className='h- w-3'
+                        />
+                        <ChevronRightIcon
+                            onClick={() => handleMonthChange('next')}
+                            className='h-3 w-3'
+                        />
                     </div>
                 </div>
-                <div className="grid grid-cols-7 gap-1">
-                    {["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"].map((day, index) => (
-                        <div key={index} className="text-center">{day}</div>
+                <div className='grid grid-cols-7 gap-1'>
+                    {['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'].map((day, index) => (
+                        <div
+                            key={index}
+                            className='text-center'
+                        >
+                            {day}
+                        </div>
                     ))}
                     {days.map((day, index) => (
                         <span
                             key={index}
                             onClick={() => handleDayClick(day as number)}
-                            className={`text-[13px] cursor-pointer w-[20px] h-[20px] flex justify-center items-center ${
+                            className={`flex h-[20px] w-[20px] cursor-pointer items-center justify-center text-[13px] ${
                                 day === null
-                                    ? "text-transparent cursor-default"  // Отключаем hover и изменяем курсор на default
-                                    : "hover:text-white hover:bg-sky-500 hover:rounded-full" // Включаем hover только если day !== null
+                                    ? 'cursor-default text-transparent' // Отключаем hover и изменяем курсор на default
+                                    : 'hover:rounded-full hover:bg-sky-500 hover:text-white' // Включаем hover только если day !== null
                             } ${
                                 day === null
-                                    ? ""  // Если day === null, то не применяем другие стили
+                                    ? '' // Если day === null, то не применяем другие стили
                                     : day === selectedDate.getDate()
-                                        ? "bg-blue-300 text-white rounded-full" // Выбранный день
-                                        : ""
+                                      ? 'rounded-full bg-blue-300 text-white' // Выбранный день
+                                      : ''
                             }`}
                         >
-                            {day !== null ? day : ""}
+                            {day !== null ? day : ''}
                         </span>
                     ))}
                 </div>
@@ -100,15 +114,15 @@ const Calendar: React.FC<Props> = ({date,selectDate}) => {
     };
 
     const renderMonths = () => {
-        const months = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
+        const months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
         return (
             <div>
-                <div className="flex justify-between items-center">
-                    <button onClick={() => handleMonthChange("prev")}>Prev</button>
+                <div className='flex items-center justify-between'>
+                    <button onClick={() => handleMonthChange('prev')}>Prev</button>
                     <h2>{selectedDate.getFullYear()}</h2>
-                    <button onClick={() => handleMonthChange("next")}>Next</button>
+                    <button onClick={() => handleMonthChange('next')}>Next</button>
                 </div>
-                <div className="grid grid-cols-3 gap-1">
+                <div className='grid grid-cols-3 gap-1'>
                     {months.map((month, index) => (
                         <button
                             key={index}
@@ -117,11 +131,7 @@ const Calendar: React.FC<Props> = ({date,selectDate}) => {
                                 setSelectedDate(newDate);
                                 switchToDaysMode(); // После выбора месяца переходим к дням
                             }}
-                            className={`p-2 rounded-md ${
-                                index === selectedDate.getMonth()
-                                    ? "bg-blue-500 text-white"
-                                    : "hover:bg-blue-100"
-                            }`}
+                            className={`rounded-md p-2 ${index === selectedDate.getMonth() ? 'bg-blue-500 text-white' : 'hover:bg-blue-100'}`}
                         >
                             {month}
                         </button>
@@ -137,12 +147,12 @@ const Calendar: React.FC<Props> = ({date,selectDate}) => {
         const years = [...Array(10)].map((_, index) => startYear + index);
         return (
             <div>
-                <div className="flex justify-between items-center">
+                <div className='flex items-center justify-between'>
                     <button onClick={() => setSelectedDate(subMonths(selectedDate, 12))}>Prev</button>
                     <h2>{`${startYear} - ${startYear + 9}`}</h2>
                     <button onClick={() => setSelectedDate(addMonths(selectedDate, 12))}>Next</button>
                 </div>
-                <div className="grid grid-cols-3 gap-1">
+                <div className='grid grid-cols-3 gap-1'>
                     {years.map((year) => (
                         <button
                             key={year}
@@ -151,11 +161,7 @@ const Calendar: React.FC<Props> = ({date,selectDate}) => {
                                 setSelectedDate(newDate);
                                 switchToMonthsMode();
                             }}
-                            className={`p-2 rounded-md ${
-                                year === selectedDate.getFullYear()
-                                    ? "bg-blue-500 text-white"
-                                    : "hover:bg-blue-100"
-                            }`}
+                            className={`rounded-md p-2 ${year === selectedDate.getFullYear() ? 'bg-blue-500 text-white' : 'hover:bg-blue-100'}`}
                         >
                             {year}
                         </button>
@@ -166,22 +172,23 @@ const Calendar: React.FC<Props> = ({date,selectDate}) => {
     };
 
     return (
-        <div className="p-10">
+        <div className='p-10'>
             <div
-                className='border w-[300px] relative'
+                className='relative w-[300px] border'
                 onClick={() => setIsOpen(!isOpen)}
             >
-                {date
-                    ? format(date, "dd.MM.yyyy", {locale: ru})
-                    : 'Выберите дату'}
+                {date ? format(date, 'dd.MM.yyyy', { locale: ru }) : 'Выберите дату'}
             </div>
-            {isOpen &&
-                <div ref={calendarRef} className='absolute w-[300px] border p-2 mt-1 bg-white z-10'>
+            {isOpen && (
+                <div
+                    ref={calendarRef}
+                    className='absolute z-10 mt-1 w-[300px] border bg-white p-2'
+                >
                     {mode === 'days' && renderDays()}
                     {mode === 'months' && renderMonths()}
                     {mode === 'years' && renderYears()}
                 </div>
-            }
+            )}
         </div>
     );
 };

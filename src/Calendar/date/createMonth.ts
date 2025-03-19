@@ -1,5 +1,5 @@
 import { getMonthNumberOfDays } from './getMonthNumberOfDays.ts';
-import {createDate} from "./createDay.ts";
+import { createDate } from './createDay.ts';
 
 interface CreateMonthParams {
     date?: Date;
@@ -13,8 +13,7 @@ export const createMonth = (params?: CreateMonthParams) => {
     const d = createDate({ date, locale });
     const { month: monthName, year, monthNumber, monthIndex } = d;
 
-    const getDay = (dayNumber: number) =>
-        createDate({ date: new Date(year, monthIndex, dayNumber), locale });
+    const getDay = (dayNumber: number) => createDate({ date: new Date(year, monthIndex, dayNumber), locale });
 
     const createMonthDays = () => {
         const days = [];
@@ -32,6 +31,6 @@ export const createMonth = (params?: CreateMonthParams) => {
         monthIndex,
         monthNumber,
         year,
-        createMonthDays
+        createMonthDays,
     };
 };

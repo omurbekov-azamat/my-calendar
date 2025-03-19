@@ -1,5 +1,5 @@
-import { useState, useCallback, useRef, useEffect } from "react";
-import { ChevronUpDownIcon } from "@heroicons/react/24/outline";
+import { useState, useCallback, useRef, useEffect } from 'react';
+import { ChevronUpDownIcon } from '@heroicons/react/24/outline';
 
 interface Option {
     value: number | string;
@@ -17,23 +17,26 @@ interface CustomSelectProps {
 }
 
 const CustomSelect: React.FC<CustomSelectProps> = ({
-                                                       options,
-                                                       value,
-                                                       onChange,
-                                                       placeholder = "Select an option",
-                                                       className = "",
-                                                       buttonClassName = "",
-                                                       dropdownClassName = "",
-                                                   }) => {
+    options,
+    value,
+    onChange,
+    placeholder = 'Select an option',
+    className = '',
+    buttonClassName = '',
+    dropdownClassName = '',
+}) => {
     const [isOpen, setIsOpen] = useState(false);
     const [openAbove, setOpenAbove] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
 
-    const handleSelect = useCallback((option: Option) => {
-        onChange(option);
-        setIsOpen(false);
-    }, [onChange]);
+    const handleSelect = useCallback(
+        (option: Option) => {
+            onChange(option);
+            setIsOpen(false);
+        },
+        [onChange],
+    );
 
     const toggleDropdown = useCallback(() => {
         if (!isOpen && dropdownRef.current) {
@@ -58,35 +61,36 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
             }
         };
 
-        document.addEventListener("mousedown", handleClickOutside);
+        document.addEventListener('mousedown', handleClickOutside);
 
         return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
 
     return (
-        <div className={`relative w-64 ${className}`} ref={dropdownRef}>
+        <div
+            className={`relative w-64 ${className}`}
+            ref={dropdownRef}
+        >
             <button
                 ref={buttonRef}
                 onClick={toggleDropdown}
-                className={`flex justify-between items-center w-full p-2 border rounded-md bg-white shadow-md ${buttonClassName}`}
+                className={`flex w-full items-center justify-between rounded-md border bg-white p-2 shadow-md ${buttonClassName}`}
             >
                 <span>{value ? value.label : placeholder}</span>
-                <ChevronUpDownIcon className="w-5 h-5" />
+                <ChevronUpDownIcon className='h-5 w-5' />
             </button>
 
             {isOpen && (
                 <ul
-                    className={`absolute w-full bg-white border rounded-md shadow-md z-10 overflow-hidden
-                        ${openAbove ? "bottom-full mb-1" : "top-full mt-1"} 
-                        ${dropdownClassName}`}
+                    className={`absolute z-10 w-full overflow-hidden rounded-md border bg-white shadow-md ${openAbove ? 'bottom-full mb-1' : 'top-full mt-1'} ${dropdownClassName}`}
                 >
                     {options.map((option) => (
                         <li
                             key={option.value}
                             onClick={() => handleSelect(option)}
-                            className="p-2 cursor-pointer hover:bg-blue-100 flex justify-between"
+                            className='flex cursor-pointer justify-between p-2 hover:bg-blue-100'
                         >
                             {option.label}
                         </li>

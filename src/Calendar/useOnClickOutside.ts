@@ -1,8 +1,8 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 export const useOnClickOutside = (
-    ref: React.RefObject<HTMLElement> | null,  // Используем HTMLElement, чтобы принимать любой элемент
-    callback: () => void
+    ref: React.RefObject<HTMLElement> | null, // Используем HTMLElement, чтобы принимать любой элемент
+    callback: () => void,
 ) => {
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -11,11 +11,11 @@ export const useOnClickOutside = (
             }
         };
 
-        document.addEventListener("mousedown", handleClickOutside);
+        document.addEventListener('mousedown', handleClickOutside);
 
         // Очистка события при размонтировании компонента
         return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener('mousedown', handleClickOutside);
         };
     }, [ref, callback]);
 };

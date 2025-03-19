@@ -7,12 +7,12 @@
     padding: 3px;
 }
 
-    .calendar__header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 8px;
-    }
+.calendar__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 8px;
+}
 
 .calendar__body {
     /*border-radius: 0 0 5px 5px;*/

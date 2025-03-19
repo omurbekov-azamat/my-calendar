@@ -1,4 +1,4 @@
-import {createDate} from "./createDay.ts";
+import { createDate } from './createDay.ts';
 
 export const formatDate = (date: Date, format: string) => {
     const d = createDate({ date });

@@ -1,4 +1,4 @@
-import {createDate} from "./createDay.ts";
+import { createDate } from './createDay.ts';
 
 export const getMonthesNames = (locale: string = 'defalut') => {
     const monthesNames: {
@@ -13,7 +13,7 @@ export const getMonthesNames = (locale: string = 'defalut') => {
     monthesNames.forEach((_, i) => {
         const { month, monthIndex, monthShort, date } = createDate({
             locale,
-            date: new Date(d.getFullYear(), d.getMonth() + i, 1)
+            date: new Date(d.getFullYear(), d.getMonth() + i, 1),
         });
 
         monthesNames[monthIndex] = { month, monthIndex, monthShort, date };

@@ -1,4 +1,4 @@
-import {createDate} from "./createDay.ts";
+import { createDate } from './createDay.ts';
 
 export const getWeekDaysNames = (firstWeekDay: number = 4, locale: string = 'default') => {
     const weekDaysNames: {
@@ -11,7 +11,7 @@ export const getWeekDaysNames = (firstWeekDay: number = 4, locale: string = 'def
     weekDaysNames.forEach((_, i) => {
         const { day, dayNumberInWeek, dayShort } = createDate({
             locale,
-            date: new Date(date.getFullYear(), date.getMonth(), date.getDate() + i)
+            date: new Date(date.getFullYear(), date.getMonth(), date.getDate() + i),
         });
 
         weekDaysNames[dayNumberInWeek - 1] = { day, dayShort };
