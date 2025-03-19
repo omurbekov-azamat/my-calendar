@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { ChevronUpDownIcon } from "@heroicons/react/24/outline";
 
 interface Option {
@@ -28,6 +28,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
     const [isOpen, setIsOpen] = useState(false);
     const [openAbove, setOpenAbove] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
+    const buttonRef = useRef<HTMLButtonElement>(null);
 
     const handleSelect = useCallback((option: Option) => {
         onChange(option);
@@ -45,9 +46,29 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
         setIsOpen((prev) => !prev);
     }, [isOpen]);
 
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (
+                dropdownRef.current &&
+                buttonRef.current &&
+                !dropdownRef.current.contains(event.target as Node) &&
+                !buttonRef.current.contains(event.target as Node)
+            ) {
+                setIsOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
     return (
         <div className={`relative w-64 ${className}`} ref={dropdownRef}>
             <button
+                ref={buttonRef}
                 onClick={toggleDropdown}
                 className={`flex justify-between items-center w-full p-2 border rounded-md bg-white shadow-md ${buttonClassName}`}
             >
