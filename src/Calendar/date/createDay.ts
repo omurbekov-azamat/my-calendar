@@ -1,8 +1,8 @@
-import { getWeekNumber } from './getWeekNumber';
+import { getWeekNumber } from './getWeekNumber.ts';
 
 interface CreateDateParams {
     locale?: string;
-    date?: Date;
+    date?: Date | null;
 }
 
 export const createDate = (params?: CreateDateParams) => {

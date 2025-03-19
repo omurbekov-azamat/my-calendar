@@ -1,4 +1,4 @@
-import { createMonth } from './createMonth';
+import { createMonth } from './createMonth.ts';
 import {createDate} from "./createDay.ts";
 
 interface CreateYearParams {

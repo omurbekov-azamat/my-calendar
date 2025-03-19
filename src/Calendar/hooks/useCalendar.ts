@@ -1,14 +1,14 @@
 import React from 'react';
-import {createDate} from "../../helpers/date/createDay.ts";
-import {createMonth} from "../../helpers/date/createMonth.ts";
-import {getMonthesNames} from "../../helpers/date/getMonthesNames.ts";
-import {getWeekDaysNames} from "../../helpers/date/getWeekDaysNames.ts";
-import {getMonthNumberOfDays} from "../../helpers/date/getMonthNumberOfDays.ts";
+import {createDate} from "../date/createDay.ts";
+import {createMonth} from "../date/createMonth.ts";
+import {getMonthesNames} from "../date/getMonthesNames.ts";
+import {getWeekDaysNames} from "../date/getWeekDaysNames.ts";
+import {getMonthNumberOfDays} from "../date/getMonthNumberOfDays.ts";
 
 
 interface UseCalendarParams {
     locale?: string;
-    selectedDate: Date;
+    selectedDate: Date | null;
     firstWeekDayNumber?: number;
 }
 

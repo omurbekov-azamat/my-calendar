@@ -1,0 +1,102 @@
+.calendar {
+    width: 100px;
+    border-radius: 5px;
+    text-transform: capitalize;
+    background-color: white;
+    border: 1px solid lightgray;
+    padding: 3px;
+}
+
+    .calendar__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 8px;
+    }
+
+.calendar__body {
+    /*border-radius: 0 0 5px 5px;*/
+    /*padding: 5px;*/
+}
+
+.calendar__week__names {
+    font-size: 5px;
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    font-weight: normal;
+    color: gray;
+}
+
+.calendar__days {
+    font-size: 5px;
+    text-align: center;
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(7, 9fr);
+    grid-template-rows: 1fr;
+    gap: 1px 1px;
+}
+
+.calendar__day {
+    cursor: pointer;
+    width: 10px;
+    height: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calendar__day:hover {
+    color: white;
+    background-color: skyblue;
+    border-radius: 50%;
+}
+
+.calendar__additional__day {
+    cursor: pointer;
+    color: lightgray;
+}
+
+.calendar__pick__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.calendar__pick__item:hover {
+    background-color: skyblue;
+    border-radius: 5px;
+    color: white;
+}
+
+.calendar__today__item {
+    color: lightcoral;
+}
+
+.calendar__selected__item {
+    color: white;
+    background-color: skyblue;
+    border-radius: 5px;
+}
+
+.calendar__selected__item:hover {
+    background-color: skyblue;
+}
+
+.calendar__pick__items__container {
+    color: lightgray;
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 15px 1px;
+    font-size: 8px;
+    margin-top: 10px;
+}
+
+.calendar__unchoosable__year {
+    /*padding: 9px 16px;*/
+    color: gray;
+}
